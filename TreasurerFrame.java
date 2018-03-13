@@ -28,7 +28,7 @@ public class TreasurerFrame extends JFrame {
 		constraints.weighty=1;
 		add(incomePanel,constraints);
 		
-		JPanel rmdPanel = createRmdPanel();
+		JPanel rmdPanel = createBottomPanel();
 		//constraints.gridx=0;
 		constraints.gridy=2;
 		add(rmdPanel,constraints);
@@ -111,16 +111,41 @@ public class TreasurerFrame extends JFrame {
 	   Creates panel for reminders.
 	   @return the reminder panel.
 	 */
-	public JPanel createRmdPanel() {
+	public JPanel createBottomPanel() {
 		JPanel panel = new JPanel();
-		panel.setLayout(new BorderLayout());
 		panel.setBorder(new EtchedBorder());
+		panel.setLayout(new GridBagLayout());
+		GridBagConstraints constraints = new GridBagConstraints();
+		
+		//buttons need to switch between different pages
+		
+		JButton unpaidExpensesButton = new JButton("Unpaid Expenses");
+		constraints.fill=GridBagConstraints.BOTH;
+		constraints.weightx=0.25;
+		constraints.weighty=0.1;
+		constraints.gridx=0;
+		constraints.gridy=0;
+		panel.add(unpaidExpensesButton,constraints);
+		
+		JButton advancedPaymentsButton = new JButton("Prepaid");
+		constraints.gridx=1;
+		panel.add(advancedPaymentsButton,constraints);
+		JButton coachListButton = new JButton("Coaches");
+		constraints.gridx=2;
+		panel.add(coachListButton,constraints);
+		JButton scheduleButton = new JButton("Schedule");
+		constraints.gridx=3;
+		panel.add(scheduleButton,constraints);
 		
 		//(to be added) Read in reminders and add to textArea. 
 		JTextArea rmdArea = new JTextArea(15, 20);
 		rmdArea.setEditable(false);
-		
-		panel.add(rmdArea);
+		constraints.gridwidth=4;
+		constraints.gridx=0;
+		constraints.gridy=1;
+		constraints.weightx=1;
+		constraints.weighty=0.75;
+		panel.add(rmdArea,constraints);
 		return panel;
 	}
 	
