@@ -4,9 +4,12 @@ import javax.swing.*;
 
 public class Login {
    private JFrame mainFrame;
-   private JLabel userLabel,passLabel;
+   private JLabel userLabel,passLabel,statusLabel;
    private JPanel controlPanel;
    private JTextField userText,passText;
+   
+   private Accounts account = new Accounts();
+   private Person person;
    
    public Login(){
 	   mainFrame = new JFrame("Welcome!");
@@ -14,8 +17,10 @@ public class Login {
 	   mainFrame.setLayout(new GridLayout(2, 1));
 	        
 	   controlPanel = new JPanel();
-
-	   mainFrame.add(controlPanel,BorderLayout.CENTER);
+	   statusLabel = new JLabel("", JLabel.CENTER);
+	   
+	   mainFrame.add(controlPanel);
+	   mainFrame.add(statusLabel);
 	   mainFrame.setVisible(true); 
    }
    
@@ -42,7 +47,7 @@ public class Login {
       loginPanel.add(logButton);
       
       logButton.setActionCommand("Login");
-
+      
       logButton.addActionListener(new ButtonClickListener());  
       
       controlPanel.add(userPanel);
@@ -54,9 +59,29 @@ public class Login {
       mainFrame.setVisible(true);  
    }
    
-   private class ButtonClickListener implements ActionListener{
+   private class ButtonClickListener implements ActionListener
+   {
       public void actionPerformed(ActionEvent e) {
-    	  
+    	  String command = e.getActionCommand(); 
+    	  if( command.equals( "Login" ))  {
+    		  boolean found = findAccount();
+    		  if (found) statusLabel.setText("Welcome Back!");
+    		  else statusLabel.setText("Create an Account!");
+           }
       }		
    }
+   
+   private boolean findAccount()
+   {
+	   Person found = null;
+	   
+	   if(account.findPerson(userText.getText(), passText.getText()) != null)
+	   {
+		   found = account.findPerson(userText.getText(), passText.getText());
+	   }
+	   if (found != null) return true;
+	   else return false;
+			 
+   }
+   
 }
