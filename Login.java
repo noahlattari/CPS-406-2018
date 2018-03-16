@@ -44,11 +44,15 @@ public class Login {
 	  
 	  JPanel loginPanel = new JPanel();
       JButton logButton = new JButton("Login");
+	  JButton createButton = new JButton("Create Account");
       loginPanel.add(logButton);
+	  loginPanel.add(createButton);
       
       logButton.setActionCommand("Login");
+	  createButton.setActionCommand("Create");
       
       logButton.addActionListener(new ButtonClickListener());  
+	  createButton.addActionListener(new ButtonClickListener());  
       
       controlPanel.add(userPanel);
       controlPanel.add(passPanel);
