@@ -64,9 +64,26 @@ public class Login {
       public void actionPerformed(ActionEvent e) {
     	  String command = e.getActionCommand(); 
     	  if( command.equals( "Login" ))  {
+    		  /**
     		  boolean found = findAccount();
     		  if (found) statusLabel.setText("Welcome Back!");
     		  else statusLabel.setText("Create an Account!");
+    		  **/
+    		  if (userText.getText().equals("member")) {
+    			  JFrame frame = new MemberFrame();
+    			  frame.setVisible(true);
+    			  mainFrame.dispose();
+    		  }
+    		  else if (userText.getText().equals("coach")) {
+    			  JFrame frame = new CoachFrame();
+    			  frame.setVisible(true);
+    			  mainFrame.dispose();
+    		  }
+    		  else if (userText.getText().equals("treasurer")) {
+    			  JFrame frame = new TreasurerFrame();
+    			  frame.setVisible(true);
+    			  mainFrame.dispose();
+    		  }
            }
       }		
    }
