@@ -89,6 +89,11 @@ public class Login {
     			  mainFrame.dispose();
     		  }
            }
+    	  else if (command.equals("Create")) {
+    		  JFrame frame = new RegisterFrame();
+			  frame.setVisible(true);
+			  mainFrame.dispose();
+    	  }
       }		
    }
    
