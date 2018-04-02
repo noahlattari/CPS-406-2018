@@ -9,7 +9,7 @@ public class Login {
    private JTextField userText,passText;
    
    private Accounts account = new Accounts();
-   private Person person;
+   private Person person = null;
    
    public Login(){
 	   mainFrame = new JFrame("Welcome!");
@@ -66,46 +66,47 @@ public class Login {
    private class ButtonClickListener implements ActionListener
    {
       public void actionPerformed(ActionEvent e) {
-    	  String command = e.getActionCommand(); 
-    	  if( command.equals( "Login" ))  {
-    		  /**
-    		  boolean found = findAccount();
-    		  if (found) statusLabel.setText("Welcome Back!");
-    		  else statusLabel.setText("Create an Account!");
-    		  **/
-    		  if (userText.getText().equals("member")) {
-    			  JFrame frame = new MemberFrame();
-    			  frame.setVisible(true);
-    			  mainFrame.dispose();
-    		  }
-    		  else if (userText.getText().equals("coach")) {
-    			  JFrame frame = new CoachFrame();
-    			  frame.setVisible(true);
-    			  mainFrame.dispose();
-    		  }
-    		  else if (userText.getText().equals("treasurer")) {
-    			  JFrame frame = new TreasurerFrame();
-    			  frame.setVisible(true);
-    			  mainFrame.dispose();
-    		  }
-           }
-    	  else if (command.equals("Create")) {
-    		  JFrame frame = new RegisterFrame();
-			  frame.setVisible(true);
-			  mainFrame.dispose();
-    	  }
-      }		
+    	  	String command = e.getActionCommand(); 
+    		if( command.equals( "Login" ))  {
+    		  
+    		  	boolean found = findAccount();
+    		  	if (found) 
+			  	{
+				  	if (person.getUserType().equals("member")) {
+				  		JFrame frame = new MemberFrame();
+				  		frame.setVisible(true);
+				  		mainFrame.dispose();
+				  	} 
+				  	else if (person.getUserType().equals("coach")) {
+				  		JFrame frame = new CoachFrame();
+				  		frame.setVisible(true);
+				  		mainFrame.dispose();
+				  	}
+				  	else if (person.getUserType().equals("treasurer")) {
+				  		JFrame frame = new TreasurerFrame();
+				  		frame.setVisible(true);
+				  		mainFrame.dispose();
+				  	}
+			  	}
+				else statusLabel.setText("Create an Account!");
+			 
+    		}
+    		if(command.equals("Create"))
+    		{
+    			JFrame frame = new RegisterFrame();
+		  		frame.setVisible(true);
+		  		mainFrame.dispose();
+    		}
+      }
    }
    
    private boolean findAccount()
-   {
-	   Person found = null;
-	   
+   {   
 	   if(account.findPerson(userText.getText(), passText.getText()) != null)
 	   {
-		   found = account.findPerson(userText.getText(), passText.getText());
+		   person = account.findPerson(userText.getText(), passText.getText());
 	   }
-	   if (found != null) return true;
+	   if (person != null) return true;
 	   else return false;
 			 
    }
