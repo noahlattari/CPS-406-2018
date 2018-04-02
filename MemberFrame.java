@@ -63,9 +63,8 @@ public class MemberFrame extends JFrame {
 		panel.setBorder(new TitledBorder(new EtchedBorder(), "Announcements", 
 				TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Serif", Font.PLAIN, 25)));
 		
-		//create area to display announcments
+		//create area to display announcements
 		JTextArea anncmtArea = new JTextArea();
-		anncmtArea.setPreferredSize(new Dimension (400, 400));
 		anncmtArea.setEditable(false);
 		anncmtArea.setLineWrap(true);
 		anncmtArea.setWrapStyleWord(true);
@@ -73,9 +72,11 @@ public class MemberFrame extends JFrame {
 		
 		try {
 			Scanner scanner = new Scanner(new File("announcements.txt"));
-			int numOfAnncmt = Integer.parseInt(scanner.nextLine());
-			for (int i=0; i<numOfAnncmt; i++) {
-				anncmtArea.append(scanner.nextLine() + "\n\n");
+			scanner.nextLine();
+			while (scanner.hasNextLine()) {
+				anncmtArea.append(scanner.nextLine());
+				if (scanner.hasNextLine())
+					anncmtArea.append("\n\n");
 			}
 			scanner.close();
 			
