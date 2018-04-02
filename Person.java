@@ -40,7 +40,8 @@ public class Person implements Comparable<Person>
 	
 	public String getUserType()
 	{
-		return this.userType;
+		String type = userType.toLowerCase();
+		return type;
 	}
 	
 	public int compareTo(Person other)
