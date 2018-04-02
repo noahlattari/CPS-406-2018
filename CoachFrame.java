@@ -49,10 +49,24 @@ public class CoachFrame extends JFrame{
 		temp.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(), "Announcements", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Serif", Font.PLAIN, 25)));
 		
 		JPanel announcementPanel = new JPanel();
+		announcementPanel.setLayout(new GridBagLayout());
+		GridBagConstraints constraints = new GridBagConstraints();
+		constraints.fill=GridBagConstraints.BOTH;
+		constraints.weightx=1;
+		constraints.weighty=0.9;
+		constraints.gridx=0;
+		constraints.gridy=0;
+		constraints.gridwidth=4;
 		JTextArea announce = new JTextArea("Type to send an announcement to some/all users...");
+		announce.setPreferredSize(new Dimension (370, 150));
 		JButton sendAnnouncement = new JButton ("Announce!");
-		announcementPanel.add(announce);
-		announcementPanel.add(sendAnnouncement);
+		announcementPanel.add(announce,constraints);
+		constraints.weighty=0.1;
+		constraints.weightx=0.25;
+		constraints.gridy=1;
+		constraints.gridx=3;
+		constraints.gridwidth=1;
+		announcementPanel.add(sendAnnouncement,constraints);
 		
 		temp.add(announcementPanel);
 		return temp;
@@ -63,10 +77,24 @@ public class CoachFrame extends JFrame{
 		temp.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(), "Messages",TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Serif", Font.PLAIN, 25)));
 		
 		JPanel messagePanel = new JPanel();
+		messagePanel.setLayout(new GridBagLayout());
+		GridBagConstraints constraints = new GridBagConstraints();
+		constraints.fill=GridBagConstraints.BOTH;
+		constraints.weightx=1;
+		constraints.weighty=0.9;
+		constraints.gridx=0;
+		constraints.gridy=0;
+		constraints.gridwidth=4;
 		JTextArea message = new JTextArea("Type to send a message to a user...");
+		message.setPreferredSize(new Dimension (370, 150));
+		messagePanel.add(message,constraints);
 		JButton sendMessage = new JButton ("Send!");
-		messagePanel.add(message);
-		messagePanel.add(sendMessage);
+		constraints.weighty=0.1;
+		constraints.weightx=0.25;
+		constraints.gridy=1;
+		constraints.gridx=3;
+		constraints.gridwidth=1;
+		messagePanel.add(sendMessage,constraints);
 		
 		temp.add(messagePanel);
 		return temp;
