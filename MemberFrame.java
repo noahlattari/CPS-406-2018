@@ -76,7 +76,7 @@ public class MemberFrame extends JFrame {
 			while (scanner.hasNextLine()) {
 				anncmtArea.append(scanner.nextLine());
 				if (scanner.hasNextLine())
-					anncmtArea.append("\n\n");
+					anncmtArea.append("\n");
 			}
 			scanner.close();
 			
