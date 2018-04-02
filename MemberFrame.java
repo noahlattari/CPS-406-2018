@@ -9,14 +9,26 @@ public class MemberFrame extends JFrame {
 	
 	public MemberFrame() {
 		
+		setLayout(new GridBagLayout());
+		GridBagConstraints constraints = new GridBagConstraints();
+		constraints.fill=GridBagConstraints.BOTH;
+		constraints.weightx=1;
+		constraints.weighty=0.01;
+		constraints.gridx=0;
+		constraints.gridy=0;
+		
 		//create the panels
 		JPanel titlePanel = createTitlePanel();
 		JPanel msgPanel = createMsgPanel();
 		JPanel rmdPanel = createRmdPanel();
 		
-		add(titlePanel, BorderLayout.NORTH);
-		add(msgPanel, BorderLayout.CENTER);
-		add(rmdPanel, BorderLayout.SOUTH);
+		add(titlePanel, constraints);
+		constraints.gridy=1;
+		constraints.weighty=0.65;
+		add(msgPanel, constraints);
+		constraints.gridy=2;
+		constraints.weighty=0.45;
+		add(rmdPanel, constraints);
 		
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
 	}
@@ -27,8 +39,7 @@ public class MemberFrame extends JFrame {
 	 */
 	public JPanel createTitlePanel() {
 		JPanel panel = new JPanel();
-		panel.setLayout(new BorderLayout());
-		
+
 		//get name using some method
 		String nameStr = " Name";
 		JLabel welcomeUser = new JLabel("Welcome, " + "user" + "!");
