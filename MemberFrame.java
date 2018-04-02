@@ -63,7 +63,7 @@ public class MemberFrame extends JFrame {
 		panel.setBorder(new TitledBorder(new EtchedBorder(), "Announcements", 
 				TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Serif", Font.PLAIN, 25)));
 		
-		//(to be added) Read in messages and add to textArea. 
+		//create area to display announcments
 		JTextArea anncmtArea = new JTextArea();
 		anncmtArea.setPreferredSize(new Dimension (400, 400));
 		anncmtArea.setEditable(false);
