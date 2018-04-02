@@ -31,10 +31,10 @@ public class MemberFrame extends JFrame {
 		
 		//get name using some method
 		String nameStr = " Name";
-		JLabel name = new JLabel(nameStr);
-		name.setFont(new Font("Serif", Font.BOLD, 30));
+		JLabel welcomeUser = new JLabel("Welcome, " + "user" + "!");
+		welcomeUser.setFont(new Font("Serif", Font.BOLD, 30));
 		
-		panel.add(name);
+		panel.add(welcomeUser);
 		return panel;
 	}
 	
