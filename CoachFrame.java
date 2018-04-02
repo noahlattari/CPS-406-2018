@@ -116,17 +116,22 @@ public class CoachFrame extends JFrame {
 		temp.add(memLog);
 		return temp;
 	}
-	
 
-	class Announce implements ActionListener{
+	class Announce implements ActionListener {
 		private JTextArea announcement;
+
 		public Announce(JTextArea announce) {
 			// TODO Auto-generated constructor stub
 			this.announcement = announce;
 		}
-		public String getText(){
+
+		public String getText() {
 			return announcement.getText();
 		}
+		public void resetText(){
+			announcement.setText(null);
+		}
+
 		public void actionPerformed(ActionEvent e) {
 			try {
 				Announce temp = new Announce(announcement);
@@ -134,6 +139,7 @@ public class CoachFrame extends JFrame {
 				out.println(temp.getText());
 				out.println("");
 				out.close();
+				temp.resetText();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
