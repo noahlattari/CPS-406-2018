@@ -1,4 +1,8 @@
 import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import javax.swing.*;
 import javax.swing.border.*;
 
@@ -19,7 +23,7 @@ public class MemberFrame extends JFrame {
 		
 		//create the panels
 		JPanel titlePanel = createTitlePanel();
-		JPanel msgPanel = createMsgPanel();
+		JPanel msgPanel = createAnncmtPanel();
 		JPanel rmdPanel = createRmdPanel();
 		
 		add(titlePanel, constraints);
@@ -53,18 +57,36 @@ public class MemberFrame extends JFrame {
 	   Creates panel for messages.
 	   @return the message panel.
 	 */
-	public JPanel createMsgPanel() {
+	public JPanel createAnncmtPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		panel.setBorder(new TitledBorder(new EtchedBorder(), "Messages", 
+		panel.setBorder(new TitledBorder(new EtchedBorder(), "Announcements", 
 				TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Serif", Font.PLAIN, 25)));
 		
 		//(to be added) Read in messages and add to textArea. 
-		JTextArea msgArea = new JTextArea();
-		msgArea.setPreferredSize(new Dimension (400, 400));
-		msgArea.setEditable(false);
+		JTextArea anncmtArea = new JTextArea();
+		anncmtArea.setPreferredSize(new Dimension (400, 400));
+		anncmtArea.setEditable(false);
+		anncmtArea.setLineWrap(true);
+		anncmtArea.setWrapStyleWord(true);
+		anncmtArea.setFont(new Font("Serif", Font.PLAIN, 18));
 		
-		panel.add(msgArea);
+		try {
+			Scanner scanner = new Scanner(new File("announcements.txt"));
+			int numOfAnncmt = Integer.parseInt(scanner.nextLine());
+			for (int i=0; i<numOfAnncmt; i++) {
+				anncmtArea.append(scanner.nextLine() + "\n\n");
+			}
+			scanner.close();
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			anncmtArea.append("Error: Could not read in announcements");
+		}
+		
+		anncmtArea.setCaretPosition(0);
+		JScrollPane anncmtSPane = new JScrollPane(anncmtArea);
+		panel.add(anncmtSPane);
 		return panel;
 	}
 	
