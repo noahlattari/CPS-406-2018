@@ -14,13 +14,13 @@ public class CoachFrame extends JFrame{
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill=GridBagConstraints.BOTH;
 		constraints.weightx=1;
-		constraints.weighty=0.05;
+		constraints.weighty=0.01;
 		constraints.gridx=0;
 		constraints.gridy=0;
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		add(addWelcome(),constraints);
 		constraints.gridy=1;
-		constraints.weighty=0.5;
+		constraints.weighty=0.33;
 		add(addAnnouncements(),constraints);
 		constraints.gridy=2;
 		add(addMessages(),constraints);
