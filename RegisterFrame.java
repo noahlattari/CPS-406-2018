@@ -146,14 +146,14 @@ public class RegisterFrame extends JFrame{
 			String lastname = lastParse.getText();
 			String email = emailParse.getText();
 			String password = passwordParse.getText();
-			PrintWriter writer = new PrintWriter(new FileWriter("LoginData.txt", true));
+			PrintWriter writer = new PrintWriter(new FileWriter("Accounts.txt", true));
 			//writer = new PrintWriter("SubmitedData.txt", "UTF-8");
 			writer.println(name);
 			writer.println(lastname);
 			writer.println(email);
 			writer.println(password);
 			if (userButton.isSelected()){
-				writer.println("user");
+				writer.println("User");
 			}
 			else if (coachButton.isSelected()){
 				writer.println("Coach");
@@ -176,6 +176,11 @@ public class RegisterFrame extends JFrame{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		JFrame frame = new Login();
+		frame.setVisible(true);
+		this.dispose();
+		
+		
 			
 	}
 	
