@@ -23,18 +23,26 @@ public class MemberFrame extends JFrame {
 		
 		//create the panels
 		JPanel titlePanel = createTitlePanel();
-		JPanel msgPanel = createAnncmtPanel();
+		JPanel anncmtPanel = createAnncmtPanel();
 		JPanel rmdPanel = createRmdPanel();
 		
 		add(titlePanel, constraints);
 		constraints.gridy=1;
 		constraints.weighty=0.65;
-		add(msgPanel, constraints);
+		add(anncmtPanel, constraints);
 		constraints.gridy=2;
 		constraints.weighty=0.45;
 		add(rmdPanel, constraints);
 		
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
+	}
+	
+	public static void main(String args[]) {
+
+		MemberFrame frame = new MemberFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+
 	}
 	
 	/**
@@ -45,7 +53,6 @@ public class MemberFrame extends JFrame {
 		JPanel panel = new JPanel();
 
 		//get name using some method
-		String nameStr = " Name";
 		JLabel welcomeUser = new JLabel("Welcome, " + "user" + "!");
 		welcomeUser.setFont(new Font("Serif", Font.BOLD, 30));
 		

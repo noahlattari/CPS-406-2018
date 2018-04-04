@@ -5,6 +5,9 @@ import javax.swing.border.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -119,6 +122,8 @@ public class CoachFrame extends JFrame {
 
 	class Announce implements ActionListener {
 		private JTextArea announcement;
+		Calendar calendar = new GregorianCalendar();
+		SimpleDateFormat sdf = new SimpleDateFormat();
 
 		public Announce(JTextArea announce) {
 			// TODO Auto-generated constructor stub
@@ -136,6 +141,7 @@ public class CoachFrame extends JFrame {
 			try {
 				Announce temp = new Announce(announcement);
 				PrintWriter out = new PrintWriter(new FileWriter("announcements.txt", true));
+				out.println(sdf.format(calendar.getTime()));
 				out.println(temp.getText());
 				out.println("");
 				out.close();
