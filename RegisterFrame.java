@@ -1,14 +1,20 @@
+package memUI;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.Scanner;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,6 +28,7 @@ public class RegisterFrame extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private static final int FRAME_WIDTH = 350;
 	private static final int FRAME_HEIGHT = 360;
+	private JFrame mainFrame;
 	private JTextField nameTextField;
 	private JTextField lastTextField;
 	private JTextField emailTextField;
@@ -29,12 +36,20 @@ public class RegisterFrame extends JFrame{
 	private JRadioButton userButton;
 	private JRadioButton coachButton;
 	private JRadioButton treasurerButton;
+	private int total = 0;
+	private PrintWriter Mainwriter;
 	
 	public RegisterFrame(){
-		new JPanel();
+		mainFrame = new JFrame("Enter details");
 		createRegister();
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);	
 	}
+	
+	 public static void main(String[] args){
+		 RegisterFrame frame = new RegisterFrame();
+		 frame.createRegister();
+		 frame.setVisible(true);
+	   }
 	
 	
 	public void createRegister(){
@@ -122,7 +137,12 @@ public class RegisterFrame extends JFrame{
 		       System.out.println("Commencing Parsing");
 		       //Parse everything to file
 		       //call method with each jtextfield
+		      
 		       parseString(nameTextField, lastTextField, emailTextField, passwordTextField);  
+		       Login login = new Login();
+		       login.setVis();
+		       mainFrame.dispose();
+			
 		    }
 		});
 		
@@ -142,16 +162,18 @@ public class RegisterFrame extends JFrame{
 	
 	public void parseString(JTextField nameParse, JTextField lastParse, JTextField emailParse, JTextField passwordParse){
 		try {
+			int totallines = 0;
 			String name = nameParse.getText();	
 			String lastname = lastParse.getText();
 			String email = emailParse.getText();
 			String password = passwordParse.getText();
 			PrintWriter writer = new PrintWriter(new FileWriter("Accounts.txt", true));
-			//writer = new PrintWriter("SubmitedData.txt", "UTF-8");
+			
 			writer.println(name);
 			writer.println(lastname);
 			writer.println(email);
 			writer.println(password);
+			
 			if (userButton.isSelected()){
 				writer.println("User");
 			}
@@ -164,8 +186,11 @@ public class RegisterFrame extends JFrame{
 			else{
 				writer.println("Error");
 			}
+			
 		
 			writer.close();
+			countLines();
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -173,15 +198,25 @@ public class RegisterFrame extends JFrame{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block 
 			e.printStackTrace();
 		}
-		JFrame frame = new Login();
-		frame.setVisible(true);
-		this.dispose();
 		
 		
 			
+	}
+	
+	public void countLines() throws IOException{
+		BufferedReader reader = new BufferedReader(new FileReader("Accounts.txt"));
+		int lines = 0;
+		while (reader.readLine() != null) lines++;
+		reader.close();
+		total = lines/5 ;
+		System.out.println(total);
+	}
+	
+	public int getTotal(){
+		return total;
 	}
 	
 }
