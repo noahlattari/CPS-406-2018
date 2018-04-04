@@ -1,9 +1,15 @@
+package memUI;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Login {
-   private JFrame mainFrame;
+public class Login extends JFrame{
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+public JFrame mainFrame;
    private JLabel userLabel,passLabel,statusLabel;
    private JPanel controlPanel;
    private JTextField userText,passText;
@@ -27,9 +33,15 @@ public class Login {
    public static void main(String[] args){
 	   Login log = new Login();
 	   log.createLogin();       
+	   RegisterFrame test = new RegisterFrame();
+	   
    }
    
-   private void createLogin(){
+   public void setVis(){
+	   mainFrame.setVisible(true);
+   }
+   
+  public void createLogin(){
 	  JPanel userPanel = new JPanel();
 	  userLabel = new JLabel("Username: ");
 	  userText = new JTextField(15);
@@ -110,5 +122,6 @@ public class Login {
 	   else return false;
 			 
    }
+
    
 }
