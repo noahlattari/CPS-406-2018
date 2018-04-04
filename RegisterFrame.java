@@ -140,8 +140,9 @@ public class RegisterFrame extends JFrame{
 		      
 		       parseString(nameTextField, lastTextField, emailTextField, passwordTextField);  
 		       Login login = new Login();
-		       login.setVis();
-		       mainFrame.dispose();
+		       login.createLogin();
+		       
+		      
 			
 		    }
 		});
@@ -152,6 +153,8 @@ public class RegisterFrame extends JFrame{
 		    public void actionPerformed(ActionEvent e) {
 		    	//close the GUI
 		    	System.out.println("SYSTEM TERMINATED");
+		    	
+			       
 		    	System.exit(0);
 		    }
 		});
