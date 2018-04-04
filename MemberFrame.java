@@ -72,7 +72,6 @@ public class MemberFrame extends JFrame {
 		
 		try {
 			Scanner scanner = new Scanner(new File("announcements.txt"));
-			scanner.nextLine();
 			while (scanner.hasNextLine()) {
 				anncmtArea.append(scanner.nextLine());
 				if (scanner.hasNextLine())
