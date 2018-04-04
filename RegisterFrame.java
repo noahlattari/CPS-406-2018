@@ -18,6 +18,7 @@ import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -77,6 +78,10 @@ public class RegisterFrame extends JFrame{
 		label.setFont(new Font("Serif", Font.PLAIN, 32));
 		panel.add(label);
 		return panel;
+	}
+	
+	public void setInvis(){
+		this.setVisible(false);
 	}
 	
 	public JPanel createInputPanel(){
@@ -139,8 +144,6 @@ public class RegisterFrame extends JFrame{
 		       //call method with each jtextfield
 		      
 		       parseString(nameTextField, lastTextField, emailTextField, passwordTextField);  
-		       Login login = new Login();
-		       login.createLogin();
 		       
 		      
 			
@@ -152,10 +155,12 @@ public class RegisterFrame extends JFrame{
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
 		    	//close the GUI
-		    	System.out.println("SYSTEM TERMINATED");
+		    	System.out.println("Canceled");
 		    	
+		    	setInvis();
+		    	Login login = new Login();
+			    login.createLogin();
 			       
-		    	System.exit(0);
 		    }
 		});
 		panel.add(submit);
@@ -172,10 +177,38 @@ public class RegisterFrame extends JFrame{
 			String password = passwordParse.getText();
 			PrintWriter writer = new PrintWriter(new FileWriter("Accounts.txt", true));
 			
-			writer.println(name);
-			writer.println(lastname);
-			writer.println(email);
-			writer.println(password);
+			if ((name.matches(".*[^a-z].*")) || (name.matches(".*[^A-Z].*")) && (name.length() >= 2 )) { 
+				writer.println(name);
+			}
+			else{
+				writer.println("NAME_ERROR");
+				JOptionPane.showMessageDialog(null, "Error: Name must not contain numbers or special characters and must be at least 2 letters long.");
+			}
+			
+			if (( lastname.matches(".*[^a-z].*")) || (lastname.matches(".*[^A-Z].*")) && (lastname.length() >= 2)){  
+				writer.println(lastname);
+			}
+			else{
+				writer.println("LASTNAME_ERROR");
+				JOptionPane.showMessageDialog(null, "Error: Lastname must not contain numbers or special characters.");
+			}
+			
+			if ((email.indexOf('@') != -1) || (email.indexOf('.') != -1)){
+				writer.println(email);
+				
+			}
+			else{
+				writer.println("EMAIL_ERROR");
+				JOptionPane.showMessageDialog(null, "Error: Invalid email, please enter email in this format: example@web.com");
+			}
+			
+			if (( password.length() > 4 || password.indexOf(' ') == -1)){
+				writer.println(password);
+			}
+			else{
+				writer.println("PASSWORD_ERROR");
+				JOptionPane.showMessageDialog(null, "Error: Password must be greater than 4 characters and must not contain any spaces.");
+			}
 			
 			if (userButton.isSelected()){
 				writer.println("User");
@@ -187,12 +220,16 @@ public class RegisterFrame extends JFrame{
 				writer.println("Treasurer");
 			}
 			else{
-				writer.println("Error");
+				writer.println("SELECTION_ERROR");
+				JOptionPane.showMessageDialog(null, "Error: Select account type.");
 			}
 			
 		
 			writer.close();
 			countLines();
+			Login login = new Login();
+		       login.createLogin();
+		       
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
