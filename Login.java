@@ -43,7 +43,7 @@ public JFrame mainFrame;
    
   public void createLogin(){
 	  JPanel userPanel = new JPanel();
-	  userLabel = new JLabel("Username: ");
+	  userLabel = new JLabel("      Email: ");
 	  userText = new JTextField(15);
 	  userPanel.add(userLabel);
 	  userPanel.add(userText);
@@ -100,7 +100,7 @@ public JFrame mainFrame;
 				  		mainFrame.dispose();
 				  	}
 			  	}
-				else statusLabel.setText("Create an Account!");
+				else statusLabel.setText("Invalid email or password.");
 			 
     		}
     		if(command.equals("Create"))

@@ -1,4 +1,4 @@
-package memUI;
+//package memUI;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -118,7 +118,7 @@ public class RegisterFrame extends JFrame{
 	public JPanel createRadio(){
 		JPanel panel = new JPanel();
 		JLabel label = new JLabel("Select a user type:");
-		JRadioButton userradio = new JRadioButton("User");
+		JRadioButton userradio = new JRadioButton("Member");
 		JRadioButton coachradio = new JRadioButton("Coach");
 		JRadioButton treasurerradio = new JRadioButton("Treasurer");
 		panel.add(label, BorderLayout.NORTH);
@@ -211,7 +211,7 @@ public class RegisterFrame extends JFrame{
 			}
 			
 			if (userButton.isSelected()){
-				writer.println("User");
+				writer.println("Member");
 			}
 			else if (coachButton.isSelected()){
 				writer.println("Coach");
