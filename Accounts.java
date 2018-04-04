@@ -8,7 +8,7 @@ public class Accounts {
 	private LinkedList<Person> list;
 	private ArrayList<String> arr;
 	private Person person;
-	
+	private RegisterFrame registerFrame = new RegisterFrame();
 	public Accounts()
 	{
 		list = new LinkedList<Person>();
@@ -20,7 +20,7 @@ public class Accounts {
 		
 		catch(FileNotFoundException e)
 		{
-			System.out.println(e);
+			System.out.println("e");
 		}
 	}
 	
@@ -35,9 +35,9 @@ public class Accounts {
 			String i = in.nextLine();
 			arr.add(i);
 		}
-		if ((lines -1) % 5 != 0)
+		if ((lines) % 5 != 0)
 		{
-			throw new IllegalArgumentException("Each contact must have 5 elements");
+			throw new IllegalArgumentException("Each account must have 5 elements");
 		}
 		accountInList();
 	}
@@ -56,11 +56,13 @@ public class Accounts {
 	
 	public void accountInList()
 	{
-		int people = Integer.parseInt(arr.get(0));
+		//int people = Integer.parseInt(arr.get(0));
+		int people = registerFrame.getTotal();
 		for(int i = 0; i < people; i++)
 		{
-			Person p = new Person(arr.get(1 + (i*5)),arr.get(2 + (i*5)),arr.get(3 + (i*5)),arr.get(4 + (i*5)),arr.get(5 + (i*5)));
+			Person p = new Person(arr.get(0 + (i*5)),arr.get(1 + (i*5)),arr.get(2 + (i*5)),arr.get(3 + (i*5)),arr.get(4 + (i*5)));
 			list.add(p);
+			
 		}
 		
 	}
