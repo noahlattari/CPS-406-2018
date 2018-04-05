@@ -17,6 +17,10 @@ public class Person implements Comparable<Person>
 		this.userType = userType;
 	}
 	
+	public String toString(){
+		return this.first+" "+this.last+"\n"+this.email+"\n";
+	}
+	
 	public String getFirst()
 	{
 		return this.first;
