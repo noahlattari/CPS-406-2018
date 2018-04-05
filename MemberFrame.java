@@ -88,7 +88,7 @@ public class MemberFrame extends JFrame {
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			anncmtArea.append("Error: Could not read in announcements");
+			anncmtArea.append("No Messages");
 		}
 		
 		anncmtArea.setCaretPosition(0);
