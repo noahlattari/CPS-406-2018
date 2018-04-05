@@ -57,6 +57,16 @@ public class Accounts {
 			}
 		   return null;
 	   }
+	public ArrayList<Person> getCoaches()
+	{
+		ArrayList<Person> coaches = new ArrayList<Person>();
+		for (Person p:list){
+			if (p.getUserType().equals("coach")){
+				coaches.add(p);
+			}
+		}
+		return coaches;
+	}
 	
 	public void accountInList()
 	{
