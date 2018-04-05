@@ -1,3 +1,4 @@
+
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
@@ -17,6 +18,8 @@ public class CoachFrame extends JFrame {
 
 	private static final int FRAME_WIDTH = 400;
 	private static final int FRAME_HEIGHT = 700;
+	
+	private JTextArea announcement;
 
 	public CoachFrame() {
 		setLayout(new GridBagLayout());
@@ -67,18 +70,26 @@ public class CoachFrame extends JFrame {
 		constraints.gridx = 0;
 		constraints.gridy = 0;
 		constraints.gridwidth = 4;
-		JTextArea announce = new JTextArea("");
-		announce.setPreferredSize(new Dimension(370, 150));
+		
+		announcement = new JTextArea("Type to send an announcement to some/all users...");
+		//announcement.setPreferredSize(new Dimension(370, 150));
+		announcement.setLineWrap(true);
+		announcement.setWrapStyleWord(true);
+		announcement.setFont(new Font("Serif", Font.PLAIN, 17));
+		
+		JScrollPane announcementSPane = new JScrollPane(announcement);
+		announcementSPane.setPreferredSize(new Dimension(370, 150));
+		
 		JButton sendAnnouncement = new JButton("Announce!");
-		sendAnnouncement.addActionListener(new Announce(announce));
-		announcementPanel.add(announce, constraints);
+		sendAnnouncement.addActionListener(new AnnounceListener());
+		announcementPanel.add(announcementSPane, constraints);
 		constraints.weighty = 0.1;
 		constraints.weightx = 0.25;
 		constraints.gridy = 1;
 		constraints.gridx = 3;
 		constraints.gridwidth = 1;
 		announcementPanel.add(sendAnnouncement, constraints);
-
+		
 		temp.add(announcementPanel);
 		return temp;
 	}
@@ -99,6 +110,7 @@ public class CoachFrame extends JFrame {
 		constraints.gridwidth = 4;
 		JTextArea message = new JTextArea("Type to send a message to a user...");
 		message.setPreferredSize(new Dimension(370, 150));
+		message.setFont(new Font("Serif", Font.PLAIN, 17));
 		messagePanel.add(message, constraints);
 		JButton sendMessage = new JButton("Send!");
 		constraints.weighty = 0.1;
@@ -119,37 +131,31 @@ public class CoachFrame extends JFrame {
 		return temp;
 	}
 
-	class Announce implements ActionListener {
-		private JTextArea announcement;
+	class AnnounceListener implements ActionListener {
 		Calendar calendar = new GregorianCalendar();
 		SimpleDateFormat sdf = new SimpleDateFormat();
-
-		public Announce(JTextArea announce) {
-			// TODO Auto-generated constructor stub
-			this.announcement = announce;
-		}
-
-		public String getText() {
-			return announcement.getText();
-		}
-
-		public void resetText() {
-			announcement.setText(null);
+		
+		public boolean validMsg() {
+			int msgLength = announcement.getText().length();
+			if (msgLength == 0 || msgLength > 200)
+				return false;
+			else
+				return true;
 		}
 
 		public void actionPerformed(ActionEvent e) {
 			try {
-				Announce temp = new Announce(announcement);
 				PrintWriter out = new PrintWriter(new FileWriter("announcements.txt", true));
-				if (temp.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "You must enter an announcement", "Alert ", JOptionPane.INFORMATION_MESSAGE);
-				} else {
+				if (!validMsg()) 
+					JOptionPane.showMessageDialog(null, "Announcement must be more than 0 characters and less than 200 characters.", "Alert ", JOptionPane.INFORMATION_MESSAGE);
+				else {
 					out.println(sdf.format(calendar.getTime()));
-					out.println(temp.getText());
+					out.println(announcement.getText());
 					out.println("");
-					out.close();
-					temp.resetText();
 				}
+				announcement.setText(null);
+				out.close();
+				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
