@@ -42,13 +42,13 @@ public class TreasurerFrame extends JFrame {
 		JPanel profitPanel = createProfitPanel();
 		//constraints.gridx=0;
 		constraints.gridy=1;
-		constraints.weighty=0.28;
+		constraints.weighty=0.05;
 		add(profitPanel,constraints);
 		
 		JPanel incomePanel = createIncomePanel();
 		constraints.gridwidth=1;
 		constraints.weightx=0.5;
-		constraints.weighty=0.1;
+		constraints.weighty=0.01;
 		constraints.gridy=2;
 		add(incomePanel,constraints);
 		JPanel expensePanel = createExpensePanel();
@@ -64,7 +64,7 @@ public class TreasurerFrame extends JFrame {
 		add(buttons,constraints);
 		JPanel rmdPanel = createBottomPanel();
 		//constraints.weightx=1;
-		constraints.weighty= 0.6;
+		constraints.weighty= 0.92;
 		constraints.gridx=0;
 		constraints.gridy=4;
 		constraints.gridwidth=2;
@@ -129,7 +129,7 @@ public class TreasurerFrame extends JFrame {
 		incomeText.setText(formatter.format(profit.getIncome()));
 		incomeText.setEditable(false);
 
-		panel.add(incomeText);
+		panel.add(incomeText,BorderLayout.CENTER);
 		return panel;
 	}
 	
@@ -151,7 +151,7 @@ public class TreasurerFrame extends JFrame {
 		expenseText.setText(formatter.format(profit.getExpenses()));
 		expenseText.setEditable(false);
 
-		panel.add(expenseText);
+		panel.add(expenseText, BorderLayout.CENTER);
 		return panel;
 	}
 	
@@ -165,28 +165,23 @@ public class TreasurerFrame extends JFrame {
 	private JPanel createBottomPanel() {
 		JPanel panel = new JPanel();
 		panel.setBorder(new EtchedBorder());
-		panel.setLayout(new GridBagLayout());
-		GridBagConstraints constraints = new GridBagConstraints();
-		
-		constraints.fill=GridBagConstraints.BOTH;
-		//constraints.weightx=1;
-		/*
-		constraints.weighty=0.01;
-		constraints.gridx=0;
-		constraints.gridy=0;
-		panel.add(createButtons(),constraints);
-		*/
-		
+		panel.setLayout(new BorderLayout());
+		//panel.setLayout(new GridBagLayout());
+		//GridBagConstraints constraints = new GridBagConstraints();
+		//constraints.fill=GridBagConstraints.BOTH;
+
 		//(to be added) Read in reminders and add to textArea. 
 		rmdArea = new JTextArea();
 		rmdArea.setEditable(false);
-		//constraints.gridwidth=4;
+		/*
 		constraints.gridx=0;
-		constraints.gridy=1;
+		constraints.gridy=0;
 		constraints.weightx=1;
-		//constraints.weighty=0.99;
 		constraints.weighty=1;
-		panel.add(rmdArea,constraints);
+		panel.add(rmdArea,constraints);*/
+		rmdArea.setCaretPosition(0);
+		JScrollPane rmdPane = new JScrollPane(rmdArea);
+		panel.add(rmdPane);
 		return panel;
 	}
 	
@@ -200,7 +195,7 @@ public class TreasurerFrame extends JFrame {
 		unpaidExpensesButton = new JButton("Unpaid Expenses");
 		unpaidExpensesButton.setActionCommand("Unpaid");
 		unpaidExpensesButton.addActionListener(new ButtonClickListener());
-		constraints.fill=GridBagConstraints.BOTH;
+		//constraints.fill=GridBagConstraints.BOTH;
 		constraints.weightx=0.25;
 		constraints.weighty=1;
 		constraints.gridx=0;
