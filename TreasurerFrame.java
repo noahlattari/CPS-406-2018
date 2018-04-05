@@ -5,7 +5,6 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 import javax.swing.*;
-import javax.swing.SpringLayout.Constraints;
 import javax.swing.border.*;
 
 public class TreasurerFrame extends JFrame {
@@ -27,27 +26,48 @@ public class TreasurerFrame extends JFrame {
 	
 	public TreasurerFrame() {
 		profit = new Profit();
-		formatter = new DecimalFormat("$#0.00");
+		formatter = new DecimalFormat(" $#0.00");
 		setLayout(new GridBagLayout());
 		GridBagConstraints constraints = new GridBagConstraints();
 		//get name using some method
 		constraints.fill=GridBagConstraints.BOTH;
 		constraints.weightx=1;
-		constraints.weighty=0.1;
+		constraints.weighty=0.01;
 		constraints.gridx=0;
 		constraints.gridy=0;
+		constraints.gridwidth=2;
 		//constraints.gridwidth=2;
 		add(addWelcome(),constraints);
 		
-		JPanel incomePanel = createProfitPanel();
+		JPanel profitPanel = createProfitPanel();
 		//constraints.gridx=0;
 		constraints.gridy=1;
-		constraints.weighty=1;
-		add(incomePanel,constraints);
+		constraints.weighty=0.28;
+		add(profitPanel,constraints);
 		
-		JPanel rmdPanel = createBottomPanel();
-		//constraints.gridx=0;
+		JPanel incomePanel = createIncomePanel();
+		constraints.gridwidth=1;
+		constraints.weightx=0.5;
+		constraints.weighty=0.1;
 		constraints.gridy=2;
+		add(incomePanel,constraints);
+		JPanel expensePanel = createExpensePanel();
+		constraints.gridx=1;
+		add(expensePanel,constraints);
+		
+		JPanel buttons = createButtons();
+		constraints.weightx=1;
+		constraints.weighty=0.01;
+		constraints.gridy=3;
+		constraints.gridx=0;
+		constraints.gridwidth=2;
+		add(buttons,constraints);
+		JPanel rmdPanel = createBottomPanel();
+		//constraints.weightx=1;
+		constraints.weighty= 0.6;
+		constraints.gridx=0;
+		constraints.gridy=4;
+		constraints.gridwidth=2;
 		add(rmdPanel,constraints);
 		
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -67,33 +87,28 @@ public class TreasurerFrame extends JFrame {
 	 */
 	private JPanel createProfitPanel() {
 		JPanel panel = new JPanel();
-		panel.setBorder(new EtchedBorder());
+		panel.setBorder(new TitledBorder(new EtchedBorder(), "Profit", 
+				TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Serif", Font.PLAIN, 25)));
 		panel.setLayout(new GridBagLayout());
 		
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill=GridBagConstraints.BOTH;
 		
 		//(to be added) Read in messages and add to textArea. 
-		netProfitText = new JTextArea(5, 5);
+		netProfitText = new JTextArea();
 		netProfitText.setFont(new Font("Serif", Font.BOLD, 90));
 		netProfitText.setText(formatter.format(profit.getProfit()));
 		netProfitText.setEditable(false);
+		
+		constraints.fill=GridBagConstraints.BOTH;
 		constraints.gridx=0;
 		constraints.gridy=0;
-		constraints.gridwidth=2;
+		constraints.gridwidth=1;
 		constraints.weightx=1;
-		constraints.weighty=0.5;
+		constraints.weighty=1;
 		panel.add(netProfitText,constraints);
 		
-		JPanel incomePanel = createIncomePanel();
-		constraints.gridwidth=1;
-		constraints.gridy=1;
-		constraints.weighty=1;
-		panel.add(incomePanel,constraints);
-		JPanel expensePanel = createExpensePanel();
-		constraints.gridx=1;
-		panel.add(expensePanel,constraints);
-		
+		//panel.add(netProfitText);
 		return panel;
 	}
 	
@@ -105,9 +120,10 @@ public class TreasurerFrame extends JFrame {
 	private JPanel createIncomePanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		panel.setBorder(new EtchedBorder());
+		panel.setBorder(new TitledBorder(new EtchedBorder(), "Income", 
+				TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Serif", Font.PLAIN, 25)));
 		
-		incomeText = new JTextArea(5,5);
+		incomeText = new JTextArea();
 		incomeText.setEditable(false);
 		incomeText.setFont(new Font("Serif", Font.BOLD, 40));
 		incomeText.setText(formatter.format(profit.getIncome()));
@@ -125,9 +141,11 @@ public class TreasurerFrame extends JFrame {
 	private JPanel createExpensePanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		panel.setBorder(new EtchedBorder());
+		panel.setBorder(new TitledBorder(new EtchedBorder(), "Expenses", 
+				TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Serif", Font.PLAIN, 25)));
 		
-		expenseText = new JTextArea(5,5);
+		
+		expenseText = new JTextArea();
 		expenseText.setEditable(false);
 		expenseText.setFont(new Font("Serif", Font.BOLD, 40));
 		expenseText.setText(formatter.format(profit.getExpenses()));
@@ -151,21 +169,23 @@ public class TreasurerFrame extends JFrame {
 		GridBagConstraints constraints = new GridBagConstraints();
 		
 		constraints.fill=GridBagConstraints.BOTH;
-		constraints.weightx=1;
+		//constraints.weightx=1;
+		/*
 		constraints.weighty=0.01;
 		constraints.gridx=0;
 		constraints.gridy=0;
 		panel.add(createButtons(),constraints);
-		
+		*/
 		
 		//(to be added) Read in reminders and add to textArea. 
-		rmdArea = new JTextArea(15, 20);
+		rmdArea = new JTextArea();
 		rmdArea.setEditable(false);
-		constraints.gridwidth=4;
+		//constraints.gridwidth=4;
 		constraints.gridx=0;
 		constraints.gridy=1;
 		constraints.weightx=1;
-		constraints.weighty=0.99;
+		//constraints.weighty=0.99;
+		constraints.weighty=1;
 		panel.add(rmdArea,constraints);
 		return panel;
 	}

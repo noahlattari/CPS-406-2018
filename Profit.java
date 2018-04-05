@@ -14,32 +14,56 @@ public class Profit {
 		expenses=0;
 		try
 		{
-			readFile();
+			readIncomeFile();
 		}
 		
 		catch(FileNotFoundException e)
 		{
 			System.out.println(e);
 		}
-		for (double element : arr){
+		try
+		{
+			readExpensesFile();
+		}
+		
+		catch(FileNotFoundException e)
+		{
+			System.out.println(e);
+		}
+		/*for (double element : arr){
 			if (element>0){
 				income+=element;
 			}
 			else if (element<0){
 				expenses+=-(element);
 			}
-		}
+		}*/
 		profit=income-expenses;
 	}
-	public void readFile() throws FileNotFoundException
+	public void readIncomeFile() throws FileNotFoundException
 	{
-		int lines = 0;
-		File file = new File("income.txt");
+		File file = new File("income.csv");
 		Scanner in = new Scanner(file);
+		in.useDelimiter(",");
+		if (in.hasNextLine()) in.nextLine();
 		while(in.hasNextLine())
 		{
-			arr.add(in.nextDouble());
+			income+=(in.nextDouble());
+			in.nextLine();
 		}
+		in.close();
+	}
+	public void readExpensesFile() throws FileNotFoundException{
+		File file = new File("expenses.csv");
+		Scanner in = new Scanner(file);
+		in.useDelimiter(",");
+		if (in.hasNextLine()) in.nextLine();
+		while(in.hasNextLine())
+		{
+			expenses+=(in.nextDouble());
+			in.nextLine();
+		}
+		in.close();
 	}
 	public double getIncome(){
 		return income;
