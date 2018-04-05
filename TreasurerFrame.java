@@ -17,6 +17,14 @@ public class TreasurerFrame extends JFrame {
 	private Profit profit;
 	private NumberFormat formatter;
 	
+	public static void main(String args[]) {
+
+		TreasurerFrame frame = new TreasurerFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+
+	}
+	
 	public TreasurerFrame() {
 		profit = new Profit();
 		formatter = new DecimalFormat("$#0.00");
@@ -197,6 +205,16 @@ public class TreasurerFrame extends JFrame {
 		return panel;
 	}
 	
+	private String getCoachList(){
+		Accounts accounts= new Accounts();
+		String coaches="";
+		for (Person element : accounts.getCoaches() ){
+			coaches+=element.toString();
+			
+		}
+		return coaches;
+	}
+	
 	private class ButtonClickListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			String command = e.getActionCommand(); 
@@ -208,7 +226,7 @@ public class TreasurerFrame extends JFrame {
 	    		rmdArea.setText("Prepaid");
 	    	}
 	    	else if (command.equals("Coaches")){
-	    		rmdArea.setText("Coaches");
+	    		rmdArea.setText(getCoachList());
 	    	}
 	    	else if (command.equals("Schedule")){
 	    		rmdArea.setText("Schedule");
