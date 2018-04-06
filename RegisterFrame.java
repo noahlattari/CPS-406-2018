@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -54,7 +55,7 @@ public class RegisterFrame extends JFrame{
 	
 	
 	public void createRegister(){
-	//call methods to create pannels	
+	//call methods to create panels	
 	JPanel textPanel = createTextPanel();	
 	JPanel inputPanel = createInputPanel();
 	JPanel emailPanel = createEmailInput();
@@ -125,6 +126,10 @@ public class RegisterFrame extends JFrame{
 		panel.add(userradio, BorderLayout.SOUTH);
 		panel.add(coachradio);
 		panel.add(treasurerradio);
+		ButtonGroup group = new ButtonGroup();
+		group.add(userradio);
+		group.add(coachradio);
+		group.add(treasurerradio);
 		this.userButton = userradio;
 		this.coachButton = coachradio;
 		this.treasurerButton = treasurerradio;
