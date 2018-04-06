@@ -1,28 +1,9 @@
-//package memUI;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.util.Scanner;
+import java.io.*;
+import javax.swing.*;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 public class RegisterFrame extends JFrame{	
 	/**
 	 * 
@@ -30,7 +11,6 @@ public class RegisterFrame extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private static final int FRAME_WIDTH = 350;
 	private static final int FRAME_HEIGHT = 360;
-	private JFrame mainFrame;
 	private JTextField nameTextField;
 	private JTextField lastTextField;
 	private JTextField emailTextField;
@@ -39,20 +19,15 @@ public class RegisterFrame extends JFrame{
 	private JRadioButton coachButton;
 	private JRadioButton treasurerButton;
 	private int total = 0;
-	private PrintWriter Mainwriter;
 	
 	public RegisterFrame(){
-		mainFrame = new JFrame("Enter details");
+		setTitle("Enter details"); 
 		createRegister();
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);	
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
 	}
-	
-	 public static void main(String[] args){
-		 RegisterFrame frame = new RegisterFrame();
-		 frame.createRegister();
-		 frame.setVisible(true);
-	   }
-	
 	
 	public void createRegister(){
 	//call methods to create panels	
@@ -79,10 +54,6 @@ public class RegisterFrame extends JFrame{
 		label.setFont(new Font("Serif", Font.PLAIN, 32));
 		panel.add(label);
 		return panel;
-	}
-	
-	public void setInvis(){
-		this.setVisible(false);
 	}
 	
 	public JPanel createInputPanel(){
@@ -162,9 +133,8 @@ public class RegisterFrame extends JFrame{
 		    	//close the GUI
 		    	//System.out.println("Canceled");
 		    	
-		    	setInvis();
-		    	Login login = new Login();
-			    login.createLogin();
+		    	dispose();
+		    	new Login();
 			       
 		    }
 		});
@@ -199,7 +169,7 @@ public class RegisterFrame extends JFrame{
 			}
 			
 			//if ((email.indexOf('@') != -1) || (email.indexOf('.') != -1)){
-			if (email.matches("[a-zA-Z]+@[a-zA-z]+.[a-zA-Z]+")){
+			if (email.matches("[a-zA-Z0-9\\.\\-_]+@[a-zA-z]+.[a-zA-Z]+")){
 				writeTo+=email+"\n";
 				
 			}
@@ -234,9 +204,8 @@ public class RegisterFrame extends JFrame{
 			writer.println(writeTo);
 			writer.close();
 			countLines();
-			Login login = new Login();
-			login.createLogin();
-		       mainFrame.dispose();
+			new Login();
+		    dispose();
 		       
 			
 		} catch (FileNotFoundException e) {

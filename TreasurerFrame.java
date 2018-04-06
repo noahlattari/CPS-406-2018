@@ -16,14 +16,6 @@ public class TreasurerFrame extends JFrame {
 	private Profit profit;
 	private NumberFormat formatter;
 	
-	public static void main(String args[]) {
-
-		TreasurerFrame frame = new TreasurerFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-
-	}
-	
 	public TreasurerFrame() {
 		profit = new Profit();
 		formatter = new DecimalFormat(" $#0.00");
@@ -71,6 +63,8 @@ public class TreasurerFrame extends JFrame {
 		add(rmdPanel,constraints);
 		
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
 	}
 	
 	private JPanel addWelcome(){

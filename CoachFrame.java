@@ -38,14 +38,9 @@ public class CoachFrame extends JFrame {
 		add(addMessages(), constraints);
 		constraints.gridy = 3;
 		add(addMemLog(), constraints);
-	}
-
-	public static void main(String args[]) {
-
-		CoachFrame frame = new CoachFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
 	}
 
 	public JPanel addWelcome() {
@@ -72,7 +67,6 @@ public class CoachFrame extends JFrame {
 		constraints.gridwidth = 4;
 		
 		announcement = new JTextArea("Type to send an announcement to some/all users...");
-		//announcement.setPreferredSize(new Dimension(370, 150));
 		announcement.setLineWrap(true);
 		announcement.setWrapStyleWord(true);
 		announcement.setFont(new Font("Serif", Font.PLAIN, 17));

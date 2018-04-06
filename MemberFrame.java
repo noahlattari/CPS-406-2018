@@ -35,14 +35,9 @@ public class MemberFrame extends JFrame {
 		add(rmdPanel, constraints);
 		
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
-	}
-	
-	public static void main(String args[]) {
-
-		MemberFrame frame = new MemberFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
 	}
 	
 	/**

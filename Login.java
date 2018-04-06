@@ -1,15 +1,10 @@
-//package memUI;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 public class Login extends JFrame{
-   /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-public JFrame mainFrame;
+
+   private static final long serialVersionUID = 1L;
    private JLabel userLabel,passLabel,statusLabel;
    private JPanel controlPanel;
    private JTextField userText,passText;
@@ -18,27 +13,20 @@ public JFrame mainFrame;
    private Person person = null;
    
    public Login(){
-	   mainFrame = new JFrame("Welcome!");
-	   mainFrame.setSize(400,200);
-	   mainFrame.setLayout(new GridLayout(2, 1));
+	   setTitle("Welcome");
+	   setSize(400,230);
+	   setLayout(new GridLayout(2, 1));
 	        
 	   controlPanel = new JPanel();
 	   statusLabel = new JLabel("", JLabel.CENTER);
 	   
-	   mainFrame.add(controlPanel);
-	   mainFrame.add(statusLabel);
-	   mainFrame.setVisible(true); 
-   }
-   
-   public static void main(String[] args){
-	   Login log = new Login();
-	   log.createLogin();       
-	   RegisterFrame test = new RegisterFrame();
+	   add(controlPanel);
+	   add(statusLabel);
 	   
-   }
-   
-   public void setVis(){
-	   mainFrame.setVisible(true);
+	   createLogin();
+	   
+	   setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	   setVisible(true);
    }
    
   public void createLogin(){
@@ -72,7 +60,7 @@ public JFrame mainFrame;
       
       controlPanel.setLayout(new GridLayout(3, 1));
       
-      mainFrame.setVisible(true);  
+      setVisible(true);  
    }
    
    private class ButtonClickListener implements ActionListener
@@ -85,19 +73,16 @@ public JFrame mainFrame;
     		  	if (found) 
 			  	{
 				  	if (person.getUserType().equals("member")) {
-				  		JFrame frame = new MemberFrame();
-				  		frame.setVisible(true);
-				  		mainFrame.dispose();
+				  		new MemberFrame();
+				  		dispose();
 				  	} 
 				  	else if (person.getUserType().equals("coach")) {
-				  		JFrame frame = new CoachFrame();
-				  		frame.setVisible(true);
-				  		mainFrame.dispose();
+				  		new CoachFrame();
+				  		dispose();
 				  	}
 				  	else if (person.getUserType().equals("treasurer")) {
-				  		JFrame frame = new TreasurerFrame();
-				  		frame.setVisible(true);
-				  		mainFrame.dispose();
+				  		new TreasurerFrame();
+				  		dispose();
 				  	}
 			  	}
 				else statusLabel.setText("Invalid email or password.");
@@ -105,9 +90,8 @@ public JFrame mainFrame;
     		}
     		if(command.equals("Create"))
     		{
-    			JFrame frame = new RegisterFrame();
-		  		frame.setVisible(true);
-		  		mainFrame.dispose();
+    			new RegisterFrame();
+		  		dispose();
     		}
       }
    }
