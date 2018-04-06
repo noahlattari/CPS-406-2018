@@ -79,16 +79,21 @@ public class MemberFrame extends JFrame {
 		
 		try {
 			Scanner scanner = new Scanner(new File("announcements.txt"));
-			while (scanner.hasNextLine()) {
-				anncmtArea.append(scanner.nextLine());
-				if (scanner.hasNextLine())
-					anncmtArea.append("\n");
+			String firstLine = scanner.nextLine();
+			if (firstLine.equals(""))
+				anncmtArea.append("No Messages");
+			else {
+				anncmtArea.append(firstLine + "\n");
+				while (scanner.hasNextLine()) {
+					anncmtArea.append(scanner.nextLine());
+					if (scanner.hasNextLine())
+						anncmtArea.append("\n");
+				}
 			}
 			scanner.close();
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			anncmtArea.append("No Messages");
 		}
 		
 		anncmtArea.setCaretPosition(0);
