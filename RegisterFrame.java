@@ -169,7 +169,7 @@ public class RegisterFrame extends JFrame{
 			}
 			
 			//if ((email.indexOf('@') != -1) || (email.indexOf('.') != -1)){
-			if (email.matches("[a-zA-Z0-9\\.\\-_]+@[a-zA-z]+.[a-zA-Z]+")){
+			if (email.matches("[a-zA-Z][a-zA-Z0-9]*[[\\.\\-_][a-zA-Z0-9]]*@[a-zA-z]+.[a-zA-Z]+")){
 				writeTo+=email+"\n";
 				
 			}
