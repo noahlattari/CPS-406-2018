@@ -73,15 +73,15 @@ public class Login extends JFrame{
     		  	if (found) 
 			  	{
 				  	if (person.getUserType().equals("member")) {
-				  		new MemberFrame();
+				  		new MemberFrame(person);
 				  		dispose();
 				  	} 
 				  	else if (person.getUserType().equals("coach")) {
-				  		new CoachFrame();
+				  		new CoachFrame(person);
 				  		dispose();
 				  	}
 				  	else if (person.getUserType().equals("treasurer")) {
-				  		new TreasurerFrame();
+				  		new TreasurerFrame(person);
 				  		dispose();
 				  	}
 			  	}

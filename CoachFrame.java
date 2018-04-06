@@ -18,10 +18,11 @@ public class CoachFrame extends JFrame {
 
 	private static final int FRAME_WIDTH = 400;
 	private static final int FRAME_HEIGHT = 700;
-	
+	private String name;
 	private JTextArea announcement;
 
-	public CoachFrame() {
+	public CoachFrame(Person person) {
+		name = person.getFirst();
 		setLayout(new GridBagLayout());
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.BOTH;
@@ -45,7 +46,7 @@ public class CoachFrame extends JFrame {
 
 	public JPanel addWelcome() {
 		JPanel temp = new JPanel();
-		JLabel welcomeUser = new JLabel("Welcome, " + "user" + "!");
+		JLabel welcomeUser = new JLabel("Welcome, " + name + "!");
 		welcomeUser.setFont(new Font("Serif", Font.BOLD, 30));
 		temp.add(welcomeUser);
 		return temp;

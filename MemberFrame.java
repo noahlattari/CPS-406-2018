@@ -10,8 +10,10 @@ public class MemberFrame extends JFrame {
 	
 	private static final int FRAME_WIDTH = 400;
 	private static final int FRAME_HEIGHT = 700;
+	private String name;
 	
-	public MemberFrame() {
+	public MemberFrame(Person person) {
+		name = person.getFirst();
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints constraints = new GridBagConstraints();
@@ -40,15 +42,15 @@ public class MemberFrame extends JFrame {
 		setVisible(true);
 	}
 	
+	
 	/**
 	   Creates panel for the title.
 	   @return the title panel.
 	 */
 	public JPanel createTitlePanel() {
 		JPanel panel = new JPanel();
-
 		//get name using some method
-		JLabel welcomeUser = new JLabel("Welcome, " + "user" + "!");
+		JLabel welcomeUser = new JLabel("Welcome, " + name + "!");
 		welcomeUser.setFont(new Font("Serif", Font.BOLD, 30));
 		
 		panel.add(welcomeUser);

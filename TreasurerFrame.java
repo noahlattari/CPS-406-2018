@@ -15,8 +15,10 @@ public class TreasurerFrame extends JFrame {
 	private JButton scheduleButton, unpaidExpensesButton, advancedPaymentsButton, coachListButton;
 	private Profit profit;
 	private NumberFormat formatter;
+	private String name;
 	
-	public TreasurerFrame() {
+	public TreasurerFrame(Person person) {
+		name = person.getFirst();
 		profit = new Profit();
 		formatter = new DecimalFormat(" $#0.00");
 		setLayout(new GridBagLayout());
@@ -69,7 +71,7 @@ public class TreasurerFrame extends JFrame {
 	
 	private JPanel addWelcome(){
 		JPanel temp = new JPanel();
-		JLabel welcomeUser = new JLabel("Welcome, " + "user" + "!");
+		JLabel welcomeUser = new JLabel("Welcome, " + name + "!");
 		welcomeUser.setFont(new Font("Serif", Font.BOLD, 30));
 		temp.add(welcomeUser);
 		return temp;
