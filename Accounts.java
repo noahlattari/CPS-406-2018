@@ -94,7 +94,7 @@ public class Accounts {
 		while (reader.readLine() != null) lines++;
 		reader.close();
 		total = lines/5 ;
-		System.out.println(total);
+		//System.out.println(total);
 	}
 	
 	public int getTotal(){
