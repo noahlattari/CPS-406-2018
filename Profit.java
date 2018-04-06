@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class Profit {
 	private double income, expenses, profit;
+	private boolean validIncome, validExpense, numError;
 	ArrayList<Double>arr;
 	
 	public Profit(){
+		validIncome = true;
+		validExpense = true;
+		numError = false;
 		arr= new ArrayList<Double>();
 		income=0;
 		expenses=0;
@@ -45,10 +51,19 @@ public class Profit {
 		File file = new File("income.csv");
 		Scanner in = new Scanner(file);
 		in.useDelimiter(",");
+		boolean incomePos = true;
+		
 		if (in.hasNextLine()) in.nextLine();
-		while(in.hasNextLine())
+		while(in.hasNextLine() && validIncome)
 		{
-			income+=(in.nextDouble());
+			double newIncome = in.nextDouble();
+			if (newIncome < 0) {
+				validIncome = false;
+				numError = true;
+			}
+			else {
+				income+=newIncome;
+			}
 			in.nextLine();
 		}
 		in.close();
@@ -58,9 +73,16 @@ public class Profit {
 		Scanner in = new Scanner(file);
 		in.useDelimiter(",");
 		if (in.hasNextLine()) in.nextLine();
-		while(in.hasNextLine())
+		while(in.hasNextLine() && validExpense)
 		{
-			expenses+=(in.nextDouble());
+			double newExpense = in.nextDouble();
+			if (newExpense < 0) {
+				validExpense = false;
+				numError = true;
+			}
+			else {
+				expenses+=newExpense;
+			}
 			in.nextLine();
 		}
 		in.close();
@@ -73,5 +95,14 @@ public class Profit {
 	}
 	public double getProfit(){
 		return profit;
+	}
+	public boolean isNumError() {
+		return numError;
+	}
+	public boolean expenseIsValid() {
+		return validExpense;
+	}
+	public boolean incomeIsValid() {
+		return validIncome;
 	}
 }

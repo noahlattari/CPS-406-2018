@@ -93,7 +93,10 @@ public class TreasurerFrame extends JFrame {
 		//(to be added) Read in messages and add to textArea. 
 		netProfitText = new JTextArea();
 		netProfitText.setFont(new Font("Serif", Font.BOLD, 90));
-		netProfitText.setText(formatter.format(profit.getProfit()));
+		
+		if (!profit.isNumError())
+			netProfitText.setText(formatter.format(profit.getProfit()));
+		
 		netProfitText.setEditable(false);
 		
 		constraints.fill=GridBagConstraints.BOTH;
@@ -122,9 +125,13 @@ public class TreasurerFrame extends JFrame {
 		incomeText = new JTextArea();
 		incomeText.setEditable(false);
 		incomeText.setFont(new Font("Serif", Font.BOLD, 40));
-		incomeText.setText(formatter.format(profit.getIncome()));
 		incomeText.setEditable(false);
-
+		
+		if (!profit.isNumError())
+			incomeText.setText(formatter.format(profit.getIncome()));
+		else if (!profit.expenseIsValid()) 
+				JOptionPane.showMessageDialog(null, "Invalid expenses (input should not be negative).", "Error", JOptionPane.ERROR_MESSAGE);
+		
 		panel.add(incomeText,BorderLayout.CENTER);
 		return panel;
 	}
@@ -139,20 +146,20 @@ public class TreasurerFrame extends JFrame {
 		panel.setLayout(new BorderLayout());
 		panel.setBorder(new TitledBorder(new EtchedBorder(), "Expenses", 
 				TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Serif", Font.PLAIN, 25)));
-		
-		
+	
 		expenseText = new JTextArea();
 		expenseText.setEditable(false);
 		expenseText.setFont(new Font("Serif", Font.BOLD, 40));
-		expenseText.setText(formatter.format(profit.getExpenses()));
 		expenseText.setEditable(false);
-
+		
+		if (!profit.isNumError())
+			expenseText.setText(formatter.format(profit.getExpenses()));
+		else if (!profit.incomeIsValid())
+				JOptionPane.showMessageDialog(null, "Invalid income (input should not be negative).", "Error", JOptionPane.ERROR_MESSAGE);
+		
 		panel.add(expenseText, BorderLayout.CENTER);
 		return panel;
 	}
-	
-	
-	
 	
 	/**
 	   Creates panel for reminders.
