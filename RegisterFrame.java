@@ -144,7 +144,7 @@ public class RegisterFrame extends JFrame{
 		submit.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		       System.out.println("Commencing Parsing");
+		       //System.out.println("Commencing Parsing");
 		       //Parse everything to file
 		       //call method with each jtextfield
 		      
@@ -160,7 +160,7 @@ public class RegisterFrame extends JFrame{
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
 		    	//close the GUI
-		    	System.out.println("Canceled");
+		    	//System.out.println("Canceled");
 		    	
 		    	setInvis();
 		    	Login login = new Login();
@@ -175,76 +175,79 @@ public class RegisterFrame extends JFrame{
 	
 	public void parseString(JTextField nameParse, JTextField lastParse, JTextField emailParse, JTextField passwordParse){
 		try {
-			int totallines = 0;
+			//int totallines = 0;
 			String name = nameParse.getText();	
 			String lastname = lastParse.getText();
 			String email = emailParse.getText();
 			String password = passwordParse.getText();
-			PrintWriter writer = new PrintWriter(new FileWriter("Accounts.txt", true));
+			String writeTo="";
 			
-			if ((name.matches(".*[^a-z].*")) || (name.matches(".*[^A-Z].*")) && (name.length() >= 2 )) { 
-				writer.println(name);
+			if ((name.matches("[a-zA-Z]+")) && (name.length() >= 2 )) { 
+				writeTo+=name+"\n";
 			}
 			else{
-				writer.println("NAME_ERROR");
 				JOptionPane.showMessageDialog(null, "Error: Name must not contain numbers or special characters and must be at least 2 letters long.");
+				throw new IOException("NAME_ERROR");
 			}
 			
-			if (( lastname.matches(".*[^a-z].*")) || (lastname.matches(".*[^A-Z].*")) && (lastname.length() >= 2)){  
-				writer.println(lastname);
+			if (( lastname.matches("[a-zA-Z]+")) && (lastname.length() >= 2)){  
+				writeTo+=lastname+"\n";
 			}
 			else{
-				writer.println("LASTNAME_ERROR");
 				JOptionPane.showMessageDialog(null, "Error: Lastname must not contain numbers or special characters.");
+				throw new IOException("LASTNAME_ERROR");
 			}
 			
-			if ((email.indexOf('@') != -1) || (email.indexOf('.') != -1)){
-				writer.println(email);
+			//if ((email.indexOf('@') != -1) || (email.indexOf('.') != -1)){
+			if (email.matches("[a-zA-Z]+@[a-zA-z]+.[a-zA-Z]+")){
+				writeTo+=email+"\n";
 				
 			}
 			else{
-				writer.println("EMAIL_ERROR");
 				JOptionPane.showMessageDialog(null, "Error: Invalid email, please enter email in this format: example@web.com");
+				throw new IOException("EMAIL_ERROR");
 			}
 			
-			if (( password.length() > 4 || password.indexOf(' ') == -1)){
-				writer.println(password);
+			if (( password.length() > 4 && password.indexOf(' ') == -1)){
+				writeTo+=password+"\n";
 			}
 			else{
-				writer.println("PASSWORD_ERROR");
 				JOptionPane.showMessageDialog(null, "Error: Password must be greater than 4 characters and must not contain any spaces.");
+				throw new IOException("PASSWORD_ERROR");
 			}
 			
 			if (userButton.isSelected()){
-				writer.println("Member");
+				writeTo+="Member";
 			}
 			else if (coachButton.isSelected()){
-				writer.println("Coach");
+				writeTo+="Coach";
 			}
 			else if (treasurerButton.isSelected()){
-				writer.println("Treasurer");
+				writeTo+="Treasurer";
 			}
 			else{
-				writer.println("SELECTION_ERROR");
 				JOptionPane.showMessageDialog(null, "Error: Select account type.");
+				throw new IOException("SELECTION_ERROR");
 			}
 			
-		
+			PrintWriter writer = new PrintWriter(new FileWriter("Accounts.txt", true));
+			writer.println(writeTo);
 			writer.close();
 			countLines();
 			Login login = new Login();
-		       login.createLogin();
+			login.createLogin();
+		       mainFrame.dispose();
 		       
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block 
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		
@@ -257,7 +260,7 @@ public class RegisterFrame extends JFrame{
 		while (reader.readLine() != null) lines++;
 		reader.close();
 		total = lines/5 ;
-		System.out.println(total);
+		//System.out.println(total);
 	}
 	
 	public int getTotal(){
